@@ -11,10 +11,19 @@ public class GameManager : MonoBehaviour
     [Header("Força Aplicada")]
     public float force = 500f;
 
+    public int Score;
+
     void Start()
     {
-        // Exemplo de chamada para spawnar o prefab
-        SpawnPrefab();
+
+        InvokeRepeating("SpawnPrefab", 2f, 1f);
+        InvokeRepeating("pontuacao", 0.1f, 0.1f);
+    }
+
+
+    public void pontuacao()
+    {
+        Score++;
     }
 
     public void SpawnPrefab()

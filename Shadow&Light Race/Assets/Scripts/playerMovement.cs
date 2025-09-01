@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using System.Collections.Generic;
 
 
 public class playerMovement : MonoBehaviour
@@ -7,13 +7,15 @@ public class playerMovement : MonoBehaviour
     private int pista = 1;
     private int[] pistas = new int[] { -11, 0, 11 };
     private int[] verticais = new int[] { 0, 10 };
-
+    public Transform model;
     public int vertical = 0;
+    public float rotacao = 0f;
+    public Quaternion myrotation;
     private int velocidade = 35;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -39,19 +41,23 @@ public class playerMovement : MonoBehaviour
         {
             if (vertical == 1) 
             {
-                vertical = 0; 
+                vertical = 0;
+                rotacao = 0f;
             }
             else if (vertical == 0)  
             { 
-                vertical = 1; 
+                vertical = 1;
+                rotacao = 180f;
+
             }
         }
             
 
-        Vector3 pos = transform.position; ;
+
+        Vector3 pos = transform.position; 
         pos.x = Mathf.MoveTowards(pos.x, pistas[pista], velocidade * Time.deltaTime);
         pos.y = Mathf.MoveTowards(pos.y, verticais[vertical], velocidade * Time.deltaTime);
-
+        model.transform.rotation = Quaternion.RotateTowards(model.transform.rotation, Quaternion.Euler(0,0,rotacao), 600 * Time.deltaTime);
         transform.position = pos;
     }
 }

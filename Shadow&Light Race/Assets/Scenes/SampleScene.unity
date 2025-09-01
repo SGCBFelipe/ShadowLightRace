@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 90304751}
   - component: {fileID: 90304750}
   m_Layer: 0
-  m_Name: game maneger
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -157,6 +157,7 @@ MonoBehaviour:
   - {fileID: 1427936459}
   prefab: {fileID: 7570897561481657527, guid: 2e5b3f4f811ac8c45b73f7a5c97f9735, type: 3}
   force: 2000
+  Score: 0
 --- !u!4 &90304751
 Transform:
   m_ObjectHideFlags: 0
@@ -289,13 +290,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.17364816, y: 0, z: 0, w: 0.9848078}
-  m_LocalPosition: {x: 0, y: 5.86, z: -6.46}
+  m_LocalRotation: {x: 0.0953042, y: -0, z: -0, w: 0.9954482}
+  m_LocalPosition: {x: 0, y: 6.66, z: -8.66}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 20, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 10.938, y: 0, z: 0}
 --- !u!114 &330585547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1030,6 +1031,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91436b091bf5f6a428215aa8ac81952a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::playerMovement
+  model: {fileID: 479951583}
+  vertical: 0
+  rotacao: 0
+  myrotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &2045594722
 GameObject:
   m_ObjectHideFlags: 0
