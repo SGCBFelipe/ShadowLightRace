@@ -1,7 +1,11 @@
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+
 
 public class GameManager : MonoBehaviour
 {
+    public TMP_Text scoreText; 
     [Header("GameObjects de Spawn (até 6)")]
     public GameObject[] spawnPoints = new GameObject[6];
 
@@ -26,6 +30,11 @@ public class GameManager : MonoBehaviour
         Score++;
     }
 
+    private void Update()
+    {
+        scoreText.text = Score.ToString();
+    }
+
     public void SpawnPrefab()
     {
         // Verifica se há pelo menos um ponto de spawn configurado
@@ -34,24 +43,27 @@ public class GameManager : MonoBehaviour
             Debug.LogError("Nenhum ponto de spawn foi configurado!");
             return;
         }
+        for (int i = 0; i < Random.Range(3,5); i++) 
 
         // Escolhe aleatoriamente um dos pontos de spawn
-        int randomIndex = Random.Range(0, spawnPoints.Length);
-        GameObject chosenSpawnPoint = spawnPoints[randomIndex];
+        { 
+            int randomIndex = Random.Range(0, spawnPoints.Length);
+            GameObject chosenSpawnPoint = spawnPoints[randomIndex];
 
-        // Instancia o prefab na posição e rotação do ponto escolhido
-        GameObject spawnedObject = Instantiate(prefab, chosenSpawnPoint.transform.position, chosenSpawnPoint.transform.rotation);
+            // Instancia o prefab na posição e rotação do ponto escolhido
+            GameObject spawnedObject = Instantiate(prefab, chosenSpawnPoint.transform.position, chosenSpawnPoint.transform.rotation);
 
-        // Verifica se o objeto instanciado possui um Rigidbody
-        Rigidbody rb = spawnedObject.GetComponent<Rigidbody>();
-        if (rb != null)
-        {
-            // Aplica uma força na direção negativa do eixo Z
-            rb.AddForce(Vector3.back * force);
-        }
-        else
-        {
-            Debug.LogWarning("O prefab instanciado não possui um Rigidbody para aplicar a força.");
+            // Verifica se o objeto instanciado possui um Rigidbody
+            Rigidbody rb = spawnedObject.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                // Aplica uma força na direção negativa do eixo Z
+                rb.AddForce(Vector3.back * (force + (Score)));
+            }
+            else
+            {
+                Debug.LogWarning("O prefab instanciado não possui um Rigidbody para aplicar a força.");
+            }
         }
     }
 }

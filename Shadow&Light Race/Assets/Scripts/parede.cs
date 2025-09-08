@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class parede : MonoBehaviour
 {
@@ -18,4 +19,14 @@ public class parede : MonoBehaviour
     {
         Destroy(gameObject);
     }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            SceneManager.LoadScene("Dead");
+            print("colidiu");
+        }
+    }
+
 }

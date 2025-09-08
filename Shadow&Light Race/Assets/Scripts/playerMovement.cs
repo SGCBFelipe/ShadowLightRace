@@ -12,6 +12,7 @@ public class playerMovement : MonoBehaviour
     public float rotacao = 0f;
     public Quaternion myrotation;
     private int velocidade = 35;
+    private bool podetrocar = true;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -37,8 +38,10 @@ public class playerMovement : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && podetrocar)
         {
+            podetrocar = false;
+            Invoke(nameof(PodeVirar), 0.5f);
             if (vertical == 1) 
             {
                 vertical = 0;
@@ -48,11 +51,8 @@ public class playerMovement : MonoBehaviour
             { 
                 vertical = 1;
                 rotacao = 180f;
-
             }
         }
-            
-
 
         Vector3 pos = transform.position; 
         pos.x = Mathf.MoveTowards(pos.x, pistas[pista], velocidade * Time.deltaTime);
@@ -60,4 +60,16 @@ public class playerMovement : MonoBehaviour
         model.transform.rotation = Quaternion.RotateTowards(model.transform.rotation, Quaternion.Euler(0,0,rotacao), 600 * Time.deltaTime);
         transform.position = pos;
     }
+
+    void PodeVirar()
+    {
+        podetrocar = true;
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = new Color(1, 0, 0, 1);
+        Gizmos.DrawSphere(transform.position, 2f);
+    }
+
 }
